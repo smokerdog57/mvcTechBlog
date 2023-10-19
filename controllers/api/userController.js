@@ -55,6 +55,18 @@ const userController = {
     }
   },
 
+// Render home page logic
+renderHomepage: (req, res) => {
+  // You can pass data to the view if needed
+  const data = {
+    pageTitle: 'Welcome to the Tech Blog',
+    // Add more data as needed for your homepage
+  };
+
+  // Render the 'index' (homepage) view using the specified data
+  res.render('index', data); 
+},
+  
   // User logout logic
   logout: (req, res) => {
     // Clear user session or token
