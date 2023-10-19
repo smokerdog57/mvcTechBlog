@@ -1,132 +1,159 @@
-# 14 Model-View-Controller (MVC): Tech Blog
+# 13 Object-Relational Mapping (ORM): E-Commerce Back End
 
-## Your Task
+### Link to GitHub repository:  https://github.com/smokerdog57/ormEcommerceBackEnd
+### Castify link:   			https://drive.google.com/file/d/1ElNgsKaSbCrkKC_MV9yOo0GPZpPversy/view
 
-Writing about tech can be just as important as making it. Developers spend plenty of time creating new applications and debugging existing codebases, but most developers also spend at least some of their time reading and writing about technical concepts, recent advancements, and new technologies. A simple Google search for any concept covered in this course returns thousands of think pieces and tutorials from developers of all skill levels!
+## Badges
+    
+![github](https://img.shields.io/badge/github-Profile-lightgrey.svg)
+![JavaScript](https://img.shields.io/badge/JavaScript-yellow.svg)
+![node.js](https://img.shields.io/badge/node.js-12.0-green.svg)
+![npm](https://img.shields.io/badge/npm-6.14.4-blue.svg)
+![Express](https://img.shields.io/badge/Express-red.svg)
+![chrome castify](https://img.shields.io/badge/chrome%20castify-orange.svg)
+![Sequelize](https://img.shields.io/badge/Sequelize-blue.svg)
+![MySQL2](https://img.shields.io/badge/MySQL2-blue.svg)
+![dotenv](https://img.shields.io/badge/dotenv-blue.svg)
 
-Your task this week is to build a CMS-style blog site similar to a Wordpress site, where developers can publish their blog posts and comment on other developers’ posts as well. You’ll build this site completely from scratch and deploy it to Heroku. Your app will follow the MVC paradigm in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Requirements](#requirements)
+- [Mock-up](#mock-up)
+- [License](#license)
+- [Contributing](#contributing)
+- [Tests](#tests)
+- [Questions](#questions)
 
-## User Story
+## Description
 
+This application serves as a back-end eCommerce database server, utilizing key technologies such as ORM, MySQL2, Sequelize, Node.js, Express, and Insomnia. These technologies are employed to build and test the application, allowing for the use of Insomnia's CRUD commands to interact with API routes and their associated functionalities.  The database is dropped and recreated by executing the following commands:
+	mysql -u root -pw;
+	source ./db/schema.sql;
+
+Following the creation of the database, the database models (tables) are defined and the initial data is seeded.  This is accomplished by executing the bash command: node ./seeds/index.js This command utilizes Sequelize to generate table models and establish associations based on the definitions in ./models/index.js. The file ./models/index.js imports Category.js, Product.js, ProductTag.js, and Tag.js scripts, which extend the built-in Sequelize model class and initialize model properties.
+
+The next step is to start the backend server.  To start Server, execute the following bash command to run the ./server.js script: npm start. This script establishes a connection to the 'ecommerce_db' database by calling ./config/connection.js and sets up API routes by calling ./routes/index.js. the server application is now running and ready to serve API requests via Insomnia.
+
+## Installation
+  
+1. create a new github repository named 'ormEcommerceBackEnd'
+2. launch microsoft visual studio
+3. enter cli:  cd ~/bootcamp/homework
+4. enter cli:  git clone <repository> // creates ormEcommerceBackEnd directory
+5. enter cli:  cd ormEcommerceBackEnd
+6. enter cli:  npm init // this initializes the package.json project file
+7. Edit the `package.json` file to add the following dependencies:
+   - "dotenv": "^8.2.0",
+   - "express": "^4.17.1",
+   - "mysql2": "^2.1.0",
+   - "sequelize": "^5.21.7"
+8. enter cli: npm install //install the dependencies
+9. install Insomnia website: Go to Insomnia website using your web browser, download and install.
+	- Go to the official Insomnia website at https://insomnia.rest/download/ to download the client.
+	- Download Insomnia for Windows.
+	- Run the downloaded installer and follow the installation instructions.
+10. After running above steps create, copy and/or confirm the following directory structure and files:
+	assets			// copy from challenge
+	config
+	   connection.js	// create new file
+	db
+	   schema.sql			// xxx
+	models
+	   Category.js			// xxx
+	   index.js			// xxx	   
+	   Product.js			// xxx
+	   ProductTag.js		// xxx
+	   Tag.js			// xxx 
+	routes
+	   api
+		category-routes.js
+		index.js
+		product-routes.js
+		tag-routes.js	
+	   index.js
+	seeds
+	   category-seeds.js
+	   index.js
+	   product-seeds.js
+	   product-tag-seeds.js
+	   tag-seeds.js
+	.env
+	.gitignore
+	node_modules
+	package.json		// confirm: created by npm		
+	package-lock.json	// confirm: created by npm	
+	README.md		// copy from challenge
+
+## Usage
+
+1. open MS Visual Studio and terminal
+2. enter cli:  cd homework/ormEcommerceBackEnd
+3. enter cli:  mysql -u root -p <when prompted enter password>
+4. enter cli:  source ./db/schema.sql    // create the database
+5. open a second MS Visual Studio terminal session
+6. enter cli:  cd homework/ormEcommerceBackEnd
+7. enter cli:  npm run seed
+8. enter cli:  npm start
+9. Launch Insomnia from your desktop or the Start menu.
+10. After installation is complete, launch Insomnia from your applications or programs menu.
+11. Open Insomnia and set up a new workspace.
+12. Create Requests to test the API endpoints and organized into folders and CRUD request and request bodies.
+13. Use the created requests to test the app by sending requests to API server (e.g., http://localhost:3001) and receive responses.
+
+## Requirements
 ```md
-AS A developer who writes about tech
-I WANT a CMS-style blog site
-SO THAT I can publish articles, blog posts, and my thoughts and opinions
+GIVEN a functional Express.js API
+WHEN I add my database name, MySQL username, and MySQL password to an environment variable file
+THEN I am able to connect to a database using Sequelize
+WHEN I enter schema and seed commands
+THEN a development database is created and is seeded with test data
+WHEN I enter the command to invoke the application
+THEN my server is started and the Sequelize models are synced to the MySQL database
+WHEN I open API GET routes in Insomnia for categories, products, or tags
+THEN the data for each of these routes is displayed in a formatted JSON
+WHEN I test API POST, PUT, and DELETE routes in Insomnia
+THEN I am able to successfully create, update, and delete data in my database
 ```
-
-## Acceptance Criteria
-
-```md
-GIVEN a CMS-style blog site
-WHEN I visit the site for the first time
-THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in
-WHEN I click on the homepage option
-THEN I am taken to the homepage
-WHEN I click on any other links in the navigation
-THEN I am prompted to either sign up or sign in
-WHEN I choose to sign up
-THEN I am prompted to create a username and password
-WHEN I click on the sign-up button
-THEN my user credentials are saved and I am logged into the site
-WHEN I revisit the site at a later time and choose to sign in
-THEN I am prompted to enter my username and password
-WHEN I am signed in to the site
-THEN I see navigation links for the homepage, the dashboard, and the option to log out
-WHEN I click on the homepage option in the navigation
-THEN I am taken to the homepage and presented with existing blog posts that include the post title and the date created
-WHEN I click on an existing blog post
-THEN I am presented with the post title, contents, post creator’s username, and date created for that post and have the option to leave a comment
-WHEN I enter a comment and click on the submit button while signed in
-THEN the comment is saved and the post is updated to display the comment, the comment creator’s username, and the date created
-WHEN I click on the dashboard option in the navigation
-THEN I am taken to the dashboard and presented with any blog posts I have already created and the option to add a new blog post
-WHEN I click on the button to add a new blog post
-THEN I am prompted to enter both a title and contents for my blog post
-WHEN I click on the button to create a new blog post
-THEN the title and contents of my post are saved and I am taken back to an updated dashboard with my new blog post
-WHEN I click on one of my existing posts in the dashboard
-THEN I am able to delete or update my post and taken back to an updated dashboard
-WHEN I click on the logout option in the navigation
-THEN I am signed out of the site
-WHEN I am idle on the site for more than a set time
-THEN I am able to view posts and comments but I am prompted to log in again before I can add, update, or delete posts
-```
-
 ## Mock-Up
 
-The following animation demonstrates the application functionality:
+The following video the shows the application in use:
+https://drive.google.com/file/d/1ElNgsKaSbCrkKC_MV9yOo0GPZpPversy/view
 
-![Animation cycles through signing into the app, clicking on buttons, and updating blog posts.](./Assets/14-mvc-homework-demo-01.gif) 
+## License
 
-## Getting Started
+github, jses6, express.js
+https://opensource.org/licenses/MIT
 
-Your application’s folder structure must follow the Model-View-Controller paradigm. You’ll need to use the [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js for your Views, use the [MySQL2](https://www.npmjs.com/package/mysql2) and [Sequelize](https://www.npmjs.com/package/sequelize) packages to connect to a MySQL database for your Models, and create an Express.js API for your Controllers.
+npm
+https://opensource.org/licenses/Artistic-2.0
 
-You’ll also need the [dotenv package](https://www.npmjs.com/package/dotenv) to use environment variables, the [bcrypt package](https://www.npmjs.com/package/bcrypt) to hash passwords, and the [express-session](https://www.npmjs.com/package/express-session) and [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) packages to add authentication.
 
-**Note**: The [express-session](https://www.npmjs.com/package/express-session) package stores the session data on the client in a cookie. When you are idle on the site for more than a set time, the cookie will expire and you will be required to log in again to start a new session. This is the default behavior and you do not have to do anything to your application other than implement the npm package.
-
-## Grading Requirements
-
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
-
-This Challenge is graded based on the following criteria:
-
-### Technical Acceptance Criteria: 40%
-
-* Satisfies all of the preceding acceptance criteria plus the following:
-
-    * Application’s folder structure follows the Model-View-Controller paradigm.
-
-    * Uses the [express-handlebars](https://www.npmjs.com/package/express-handlebars) package to implement Handlebars.js for your Views.
-
-    * Application must be deployed to Heroku.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository contains application code.
-
-### Application Quality: 15%
-
-* User experience is intuitive and easy to navigate.
-
-* User interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the Challenge instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
-
----
+- - -
 © 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.
+
+## Contributing
+
+1. Sandy Smith (tutor):  Sandy helped me understand the acceptance criteria.
+
+## Tests
+
+```
+Test001: execute schema.sql, then verify ecommerce_db is created.
+Test002: execute npm run seed, then verify the employees db is seeded with the starter date.
+Test003: execute npm start, then verify the server is listening on port 3001.
+Test004: using insomnia test the CRUD methods to exercise the database.
+```
+
+## Questions
+  
+### Github username
+smokerdog57
+
+### Github url
+https://github.com/smokerdog57/ormEcommerceBackEnd
+  
+### Contact me
+email: smokerdog57@gmail.com
+phone: 941-221-1132

@@ -1,0 +1,5 @@
+-- DROP DATABASE
+DROP DATABASE IF EXISTS mvctechblog_db;
+
+-- CREATE DATABASE
+CREATE DATABASE  mvctechblog_db;
