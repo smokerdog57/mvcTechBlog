@@ -19,7 +19,8 @@
     "sequelize",
     "css",
     "html",
-    "heroku"
+    "heroku",
+    "handlebars"
   ],
   "author": "Tom Fusco",
   "license": "ISC",

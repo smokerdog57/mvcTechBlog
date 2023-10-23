@@ -1,9 +1,24 @@
-const { User } = require('../models'); // Import the User model from your models
+const { User } = require('../../models/User'); // Import the User model from your models
 const bcrypt = require('bcrypt'); // For password hashing
 
 const userController = {
-  // User registration logic
-  register: async (req, res) => {
+  // Define a function to render the login page
+  
+  renderLoginpage: (req, res) => {
+    // console.log('userController: usercontroller entered');
+    try {
+      // You can add any necessary logic here
+      // For now, render the 'splash' view
+      res.render('login');
+    } catch (error) {
+      // Handle any potential errors
+      console.error('Error in renderLoginpage:', error);
+      // You can customize error handling based on your requirements
+      res.status(500).send('userController: Internal Server Error');
+    }
+  },
+   
+  signupUser: async (req, res) => {
     try {
       const { user_id, password } = req.body;
 
@@ -27,8 +42,9 @@ const userController = {
   },
 
   // User login logic
-  login: async (req, res) => {
+  loginUser: async (req, res) => {
     try {
+      console.log('userController: loginUser entered');
       const { user_id, password } = req.body;
 
       // Find the user in the database by their user_id
@@ -55,20 +71,9 @@ const userController = {
     }
   },
 
-// Render home page logic
-renderHomepage: (req, res) => {
-  // You can pass data to the view if needed
-  const data = {
-    pageTitle: 'Welcome to the Tech Blog',
-    // Add more data as needed for your homepage
-  };
 
-  // Render the 'index' (homepage) view using the specified data
-  res.render('index', data); 
-},
-  
   // User logout logic
-  logout: (req, res) => {
+  logoutUser: (req, res) => {
     // Clear user session or token
 
     // Redirect to the homepage or login page

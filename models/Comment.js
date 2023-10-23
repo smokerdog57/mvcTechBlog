@@ -13,7 +13,7 @@ const sequelize = require('../config/connection.js');
 class Comment extends Model { }
 
 // Initialize column definitions
-Comments.init(
+Comment.init(
     {
         comment_id: {
             type: DataTypes.INTEGER,
@@ -25,6 +25,7 @@ Comments.init(
             type: DataTypes.TEXT,
             allowNull: false,
         },
+
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -38,7 +39,7 @@ Comments.init(
             allowNull: false,
             references: {
                 model: 'blogpost',
-                key: 'id',
+                key: 'post_id',
             },
         },
         created_date: {

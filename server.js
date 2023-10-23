@@ -1,44 +1,59 @@
-// server.js
-
-// import dependencies
+// Import dependencies
 const express = require('express');
 const session = require('express-session');
-const exphbs = require('express-handlebars'); // Handlebars view engine
+const exphbs = require('express-handlebars');
 const path = require('path');
-const sequelize = require('./config/connection'); // Import the Sequelize connection
-const secretKey = process.env.SECRET_KEY;
 
-// import models
-const User = require('./models/user');
-const Blogpost = require('./models/Blogpost');
-const Comment = require('./models/Comment');
+// Import routers
+const routes = require('./controllers/');
 
+// Import Sequelize dependencies
+const sequelize = require('./config/connection');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+// Set up express, port, and secret key
 const app = express();
-const PORT = process.env.PORT || 4000;
+const secretKey = process.env.SECRET_KEY;
+const PORT = process.env.PORT || 3001;
 
-// Configure Handlebars as the view engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' })); // Specify the default layout
+// Create a session instance
+const sess = {
+  secret: secretKey,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
+
+// Create a Handlebars instance
+const hbs = exphbs.create({});
+
+// Set up Handlebars as the template engine
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views')); // Set the directory for your views
 
-// Serve express and json data functions
+// Middleware to serve the browser session
+app.use(session(sess));
+
+// Middleware to serve JSON and form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// serve the session
-app.use(session({
-  secret: 'your_secret_key_here',
-  resave: false,
-  saveUninitialized: true,
-}));
+// Middleware to serve static files from the "public" directory
+app.use(express.static(path.join(__dirname,'public')));
 
-// Serve static files from the "public" directory
-app.use(express.static('public'));
-app.use(express.static(path.join(__dirname, '/')));
+// Middleware to serve the routes
+app.use(routes);
 
-// Start the server outside of the app.post block
-sequelize.sync().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-  });
+// Start the server
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}!`);
+  sequelize.sync({ force: false });
 });
