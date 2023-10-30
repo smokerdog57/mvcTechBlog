@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/api/userController');
+const userController = require('./api/userController');
 
-// console.log('1. userRoutes has started');
-
-// Define a route to render the homepage
-router.get('/login', userController.renderLoginpage);
-// console.log('2. userController called from userRoutes');
+// Define a route for both login and signup pages and serve the post of auth data
+router.get('/auth', userController.renderAuthpage);
+router.post('/auth', userController.handleAuth);
+router.get('/logout', userController.logoutUser);
 
 module.exports = router;

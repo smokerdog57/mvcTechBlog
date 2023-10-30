@@ -1,0 +1,15 @@
+{{#if posts.length}}
+  {{#each posts}}
+    <div class="blog-post">
+      <div class="post-title">
+        <h2>{{title}}</h2>
+      </div>
+      <div class="post-content">
+        <p>{{content}}</p>
+      </div>
+      <!-- Add more post details as needed -->
+    </div>
+  {{/each}}
+{{else}}
+  <p>No blog posts available.</p>
+{{/if}}

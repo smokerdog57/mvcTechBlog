@@ -2,7 +2,7 @@
 
 const { Model, DataTypes } = require('sequelize');
 
-const sequelize = require('../config/connection.js');
+const sequelize = require('../config/connection');
 
 // create instance of Model
 class User extends Model { }

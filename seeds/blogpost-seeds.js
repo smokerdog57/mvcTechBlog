@@ -2,10 +2,10 @@ const Blogpost = require('../models/Blogpost');
 
 const blogpostData = [
   {
-    title: "Test blogpost",
-    content: "This is a test blogpost",
+    title: "Why MVC is so important",
+    content: "MVC allows developers to maintain a true separation of concerns ...",
     user_id: 1,
-    created_date: "2023-10-19",
+    created_date: "10/19/2023",
   },
 ];
 

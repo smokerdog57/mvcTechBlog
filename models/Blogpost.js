@@ -42,7 +42,7 @@ Blogpost.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'blogpost', // Correct the model name to match the table name
+        modelName: 'blogpost',
     }
 );
 

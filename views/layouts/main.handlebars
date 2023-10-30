@@ -1,17 +1,39 @@
-<!DOCTYPE html>
-<html>
 <head>
-  <title>{{pageTitle}}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Tech Blog</title>
+  <link rel="stylesheet" type="text/css" href="/css/blogpost.css">
 </head>
+
 <body>
-  <header>
-    <!-- Your common header content goes here -->
-  </header>
-
-  {{{body}}} <!-- This is where the content of specific pages will be inserted -->
-
-  <footer>
-    <!-- Your common footer content goes here -->
-  </footer>
+  <div class="flex-column justify-space-around">
+    <header class="display-flex justify-space-between align-center p-2">
+      <nav>
+        {{#if loggedIn }}
+        <ul>
+          <a href="/home">Home</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/logout">Logout</a>
+        </ul>
+        <!-- Conditionally render login or logout links -->
+        {{else}}
+        <ul>
+          <a href="/home">Home</a>
+          <a href="/dashboard">Dashboard</a>
+          <a href="/auth">Login</a>
+        </ul>
+        {{/if}}
+      </nav>
+    </header>
+    <main class="container container-fluid mt-5">
+      <!-- Render the sub layout -->
+      {{{ body }}}
+    </main>
+  </div>
 </body>
+<!-- Render script for logged in users only -->
+{{#if logged_in}}
+<script src="/js/logout.js"></script>
+{{/if}}
+
 </html>

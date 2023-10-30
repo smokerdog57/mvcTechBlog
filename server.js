@@ -3,9 +3,9 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const path = require('path');
-
-// Import routers
-const routes = require('./controllers/');
+const userRoutes = require('./controllers/userRoutes');
+const dashboardRoutes = require('./controllers/dashboardRoutes');
+const homeRoutes = require('./controllers/homeRoutes');
 
 // Import Sequelize dependencies
 const sequelize = require('./config/connection');
@@ -32,8 +32,13 @@ const sess = {
   }),
 };
 
-// Create a Handlebars instance
-const hbs = exphbs.create({});
+// Create a Handlebars instance and allow protoype default
+const hbs = exphbs.create({
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
+});
 
 // Set up Handlebars as the template engine
 app.engine('handlebars', hbs.engine);
@@ -47,10 +52,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Middleware to serve static files from the "public" directory
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static('public'));
+// app.use(express.static(path.join(__dirname,'public')));
 
 // Middleware to serve the routes
-app.use(routes);
+app.use(userRoutes);
+app.use(dashboardRoutes);
+app.use(homeRoutes);
 
 // Start the server
 app.listen(PORT, () => {

@@ -1,10 +1,12 @@
-const router = require('express').Router();
-const splashRoutes = require('../splashRoutes');
-const userRoutes = require('../userRoutes')
-const dashboardRoutes = require('../dashboardRoutes');
+// import controllers
+const userController = require('./userController');
+const dashboardController = require('./dashboardController');
+const homeController = require('./homeController')
 
-router.use('/', splashRoutes);
-router.use('/login', userRoutes);
-router.use('/dashboard', dashboardRoutes);
 
-module.exports = router;
+// Export controllers
+module.exports = {
+  userController,
+  dashboardController,
+  homeController
+};
