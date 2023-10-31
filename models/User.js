@@ -1,8 +1,7 @@
 // defines user table
-
 const { Model, DataTypes } = require('sequelize');
-
 const sequelize = require('../config/connection');
+// const Blogpost = require('./Blogpost.js'); // Import the Blogpost model
 
 // create instance of Model
 class User extends Model { }
@@ -16,7 +15,7 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    user_id: {
+    email_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -29,7 +28,7 @@ User.init(
       allowNull: false,
     },
   },
-  // define Sequalize model configuration options
+  // define Sequelize model configuration options
   {
     sequelize,
     timestamps: false,
@@ -38,5 +37,6 @@ User.init(
     modelName: 'user',
   }
 );
+
 // export initialized Sequelize model instance
 module.exports = User;

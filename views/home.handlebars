@@ -1,8 +1,10 @@
+<!-- Assuming you have a blogPost object that contains the blog post data and a user object with user information -->
 {{#if posts.length}}
   {{#each posts}}
     <div class="blog-post">
       <div class="post-title">
-        <h2>{{title}}</h2>
+        <h2>{{title}}</h2> 
+        <p>Posted by {{User.user_id}} on {{created_date}}</p>
       </div>
       <div class="post-content">
         <p>{{content}}</p>

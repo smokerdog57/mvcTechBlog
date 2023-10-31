@@ -1,7 +1,7 @@
 // defines blogposts table
-
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
+const User = require('./User.js'); // Import the User model
 
 // Create an instance of the Model
 class Blogpost extends Model {}
