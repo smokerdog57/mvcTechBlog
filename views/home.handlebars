@@ -1,17 +1,13 @@
-<!-- Assuming you have a blogPost object that contains the blog post data and a user object with user information -->
-{{#if posts.length}}
-  {{#each posts}}
-    <div class="blog-post">
-      <div class="post-title">
-        <h2>{{title}}</h2> 
-        <p>Posted by {{User.user_id}} on {{created_date}}</p>
-      </div>
-      <div class="post-content">
-        <p>{{content}}</p>
-      </div>
-      <!-- Add more post details as needed -->
+{{#each posts}}
+    <div class="stacked-div-container"> <!-- Add a container for the entire stacked div -->
+        <div class="stacked-div">
+            <div class="top-section">
+                <h2>{{title}}</h2>
+                <p>Posted by {{user.email_id}} on {{created_date}}</p>
+            </div>
+            <div class="bottom-section">
+                <p>{{content}}</p>
+            </div>
+        </div>
     </div>
-  {{/each}}
-{{else}}
-  <p>No blog posts available.</p>
-{{/if}}
+{{/each}}

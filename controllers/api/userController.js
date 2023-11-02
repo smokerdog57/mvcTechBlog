@@ -15,12 +15,12 @@ const userController = {
 
   // Function to handle both login and signup actions
   handleAuth: async (req, res) => {
-    const { action, user_id, password } = req.body;
+    const { action, email_id, password } = req.body;
 
     if (action === 'login') {
       // User clicked the "Log In" button
       try {
-        const user = await User.findOne({ where: { user_id } });
+        const user = await User.findOne({ where: { email_id } });
 
         if (!user) {
           return res.status(401).json({ error: 'Invalid user credentials' });
@@ -33,7 +33,7 @@ const userController = {
         }
 
         // Set the session to indicate the user is logged in
-        req.session.userId = user_id;
+        req.session.userId = email_id;
 
         // Respond with a success message or redirect to the user dashboard
         res.redirect('/home');

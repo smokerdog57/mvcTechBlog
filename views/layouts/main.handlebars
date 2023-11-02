@@ -1,40 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your website description">
+  <meta name="keywords" content="tech, blog, technology">
+  <meta name="author" content="Your Name">
   <title>The Tech Blog</title>
-  <link rel="stylesheet" type="text/css" href="/css/blogpost.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
-
 <body>
-  <div class="flex-column justify-space-around">
-    <header class="display-flex justify-space-between align-center p-2">
-      <nav>
-        {{#if loggedIn }}
-        <ul>
-          <a href="/home">Home</a>
-          <a href="/dashboard">Dashboard</a>
-          <a href="/logout">Logout</a>
-        </ul>
-        <!-- Conditionally render login or logout links -->
-        {{else}}
-        <ul>
-          <a href="/home">Home</a>
-          <a href="/dashboard">Dashboard</a>
-          <a href="/auth">Login</a>
-        </ul>
-        {{/if}}
-      </nav>
-      <h1>The Tech Blog</h1>
-    </header>
+  <div class="container">
+    <div class="black-div">
+      <header class="black-header">
+        <nav>
+          {{#if loggedIn }}
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+          {{else}}
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/auth">Login</a></li>
+          </ul>
+          {{/if}}
+        </nav>
+        <h1>The Tech Blog</h1>
+      </header>
+    </div>
     <main class="container container-fluid mt-5">
       <!-- Render the sub layout -->
       {{{ body }}}
     </main>
+    <footer>
+      &copy; 2023 The Tech Blog
+    </footer>
   </div>
+  <!-- Render script for logged in users only -->
+  {{#if loggedIn}}
+  <script src="/js/logout.js"></script>
+  {{/if}}
 </body>
-<!-- Render script for logged in users only -->
-{{#if logged_in}}
-<script src="/js/logout.js"></script>
-{{/if}}
-
 </html>

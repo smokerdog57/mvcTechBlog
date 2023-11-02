@@ -1,0 +1,110 @@
+body {
+    margin: 10px;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow: auto;
+    /* Enable scroll bar if content overflows */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.black-div {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex: 0.2;
+}
+
+.black-div a {
+    text-decoration: none;
+    color: white;
+}
+
+.white-div {
+    background-color: white;
+    flex: 0.8;
+    /* Adjusted to allocate more space to the white div */
+    padding: 20px;
+    overflow: auto;
+    /* Enable scroll bar if content overflows */
+}
+
+.black-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 40px;
+}
+
+.black-header nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.black-header nav ul li {
+    margin: 0;
+    margin-right: 20px;
+}
+
+.black-header nav ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+h1 {
+    margin: 20px 0;
+    text-align: left;
+    color: black;
+    background-color: white;
+    border: 5px solid #333;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.stacked-div-container {
+    background-color:antiquewhite;
+}
+
+.stacked-div {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+}
+
+.top-section {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    flex: 0.2;
+    /* Adjusted to take up 20% of the stacked div */
+}
+
+.top-section h2 {
+    margin: 0;
+}
+
+.top-section p {
+    text-align: right;
+    font-size: 10px;
+}
+
+.bottom-section {
+    background-color: antiquewhite;
+    border: 2px solid black;
+    color: black;
+    padding-left: 20px;
+    flex: 0.8;
+    /* Adjusted to take up 80% of the stacked div */
+}
