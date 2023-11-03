@@ -7,5 +7,5 @@ function hashPassword(password) {
 }
 
 // Log the hashed password
-const hashedPassword = hashPassword('test');
+const hashedPassword = hashPassword('password12345');
 console.log('Hashed Password:', hashedPassword);

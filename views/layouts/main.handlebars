@@ -24,14 +24,14 @@
           <ul>
             <li><a href="/home">Home</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/auth">Login</a></li>
+            <li><a href="/login">Login</a></li>
           </ul>
           {{/if}}
         </nav>
         <h1>The Tech Blog</h1>
       </header>
     </div>
-    <main class="container container-fluid mt-5">
+    <main class="main">
       <!-- Render the sub layout -->
       {{{ body }}}
     </main>
@@ -41,7 +41,7 @@
   </div>
   <!-- Render script for logged in users only -->
   {{#if loggedIn}}
-  <script src="/js/logout.js"></script>
+  <script src="/js/logout.js"></script>;
   {{/if}}
 </body>
 </html>

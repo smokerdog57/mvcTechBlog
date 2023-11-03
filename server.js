@@ -6,6 +6,7 @@ const path = require('path');
 const userRoutes = require('./controllers/userRoutes');
 const dashboardRoutes = require('./controllers/dashboardRoutes');
 const homeRoutes = require('./controllers/homeRoutes');
+const helpers = require("./utils/helpers")
 
 // Import Sequelize dependencies
 const sequelize = require('./config/connection');
@@ -34,6 +35,7 @@ const sess = {
 
 // Create a Handlebars instance and allow protoype default
 const hbs = exphbs.create({
+  helpers,
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,
