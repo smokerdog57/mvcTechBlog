@@ -1,16 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('./api/userController');
+const userController = require('../../controllers/mvc/userController');
 
-// Route for login page
+// Route to render login page
 router.get('/login', userController.renderLoginPage);
-router.post('/login', userController.handleAuth);
 
-// Route for signup page
+// Route to render signup page
 router.get('/signup', userController.renderSignupPage);
-// Add this route for signup
-router.post('/signup', userController.handleAuth);
 
+// Route fto render comment page
+router.get('/comment', userController.renderCommentPage);
 
 // Route for logout
 router.get('/logout', userController.logoutUser);

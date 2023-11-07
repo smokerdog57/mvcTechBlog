@@ -84,6 +84,13 @@ h1 {
     height: 25%;
 }
 
+.clickable-h2 {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
 .top-section {
     background-color: black;
     color: white;

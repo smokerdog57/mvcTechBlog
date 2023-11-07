@@ -1,15 +1,13 @@
 {{#each posts}}
-    <div class="stacked-div-container"> <!-- Add a container for the entire stacked div -->
-        <div class="stacked-div">
-            <div class="top-section">
-                <h2>{{title}}
-                     <a href="/comment"></a>
-                </h2>
-                <p>Posted by {{user.name}} on {{format_date created_date}}</p>
-            </div>
-            <div class="bottom-section">
-                <p>{{content}}</p>
-            </div>
+<div class="stacked-div-container"> <!-- Add a container for the entire stacked div -->
+    <div class="stacked-div">
+        <div class="top-section">
+            <h2>{{title}}</h2>
+            <p>Posted by {{user.name}} on {{format_date created_date}}</p>
+        </div>
+        <div class="bottom-section">
+            <p>{{content}}</p>
         </div>
     </div>
+</div>
 {{/each}}

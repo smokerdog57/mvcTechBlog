@@ -11,11 +11,16 @@
 </div>
 <div class="stacked-div-container">
     <div class="stacked-div">
-        <div class="top-section">             
+        <div class="top-section">
         </div>
         <div class="bottom-section">
             <p>Comment</p>
             <p>Posted by {{user.name}} on {{format_date created_date}}</p>
+            <form action="/comment" method="POST">
+                {{!-- comment form --}}
+                <input type="text" name="text" placeholder="type comment here">
+                <button type="submit" name="action" value="submit">Submit</button>
+            </form>
         </div>
     </div>
 </div>

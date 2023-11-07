@@ -3,10 +3,11 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const userRoutes = require('./controllers/userRoutes');
-const dashboardRoutes = require('./controllers/dashboardRoutes');
-const homeRoutes = require('./controllers/homeRoutes');
-const helpers = require("./utils/helpers")
+const apiRoutes = require('./routes/api');
+const mvcRoutes = require('./routes/mvc');
+const apiControllers = require('./controllers/api');
+const mvcControllers = require('./controllers/mvc');
+
 
 // Import Sequelize dependencies
 const sequelize = require('./config/connection');
@@ -58,9 +59,8 @@ app.use(express.static('public'));
 // app.use(express.static(path.join(__dirname,'public')));
 
 // Middleware to serve the routes
-app.use(userRoutes);
-app.use(dashboardRoutes);
-app.use(homeRoutes);
+app.use('/api', apiRoutes);
+app.use('/', mvcRoutes);
 
 // Start the server
 app.listen(PORT, () => {

@@ -1,8 +1,32 @@
+// /api/postController
 const { Blogpost } = require('../models');
 
 const blogpostController = {
+   
+    // Create a new comment
+    postComment: async (req, res) => {
+        try {
+            const { user_id, text, created_date } = req.body;
+
+            // Create a new comment in the database
+            const newComment = await Comment.create({
+                user_id,
+                text,
+                created_date,
+            });
+
+            // Set up comment session or token for automatic login
+
+            // Respond with a success message or redirect to the blog post page
+            res.status(201).json({ message: 'Comment posted successfully' });
+        } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: 'Failed to post comment' });
+        }
+    },
+
     // Create a new blog post
-    postblog: async (req, res) => {
+    postBlog: async (req, res) => {
         try {
             const { user_id, title, content, created_date } = req.body;
 
