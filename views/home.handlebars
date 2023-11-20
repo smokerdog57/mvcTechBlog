@@ -1,8 +1,13 @@
+{{!-- /views/home.hbs --}}
 {{#each posts}}
 <div class="stacked-div-container"> <!-- Add a container for the entire stacked div -->
     <div class="stacked-div">
         <div class="top-section">
-            <h2>{{title}}</h2>
+            <!-- clickable title -->
+            <h2 class="blog-post-title" data-post-id="{{post_id}}">
+                {{title}}
+            </h2>
+
             <p>Posted by {{user.name}} on {{format_date created_date}}</p>
         </div>
         <div class="bottom-section">

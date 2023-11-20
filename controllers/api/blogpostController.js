@@ -1,24 +1,25 @@
-// /api/postController
-const { Blogpost } = require('../models');
+// /api/blogpostController
+const { Blogpost, Comment, User } = require('../../models');
 
 const blogpostController = {
-   
+
     // Create a new comment
     postComment: async (req, res) => {
         try {
-            const { user_id, text, created_date } = req.body;
+            const { text } = req.body;
+
+            // Retrieve the username from the session (assuming you store it there)
+            const username = req.session.username;
 
             // Create a new comment in the database
             const newComment = await Comment.create({
-                user_id,
                 text,
-                created_date,
+                username,
+                created_date: new Date(), // Set the created_date to the current date
             });
 
-            // Set up comment session or token for automatic login
-
-            // Respond with a success message or redirect to the blog post page
-            res.status(201).json({ message: 'Comment posted successfully' });
+            // Respond with a success message and the new comment
+            res.status(201).json({ message: 'Comment posted successfully', newComment });
         } catch (err) {
             console.error(err);
             res.status(500).json({ error: 'Failed to post comment' });
@@ -49,7 +50,6 @@ const blogpostController = {
     },
 
     // Update an existing blog post
-    // Implement the code for updating a blog post here
     updateBlog: async (req, res) => {
         try {
             // Add the logic to update an existing blog post
@@ -60,7 +60,6 @@ const blogpostController = {
     },
 
     // Delete a blog post
-    // Implement the code for deleting a blog post here
     deleteBlog: async (req, res) => {
         try {
             // Add the logic to delete a blog post

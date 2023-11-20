@@ -1,30 +1,45 @@
-// /mvc/postController
-const { Blogpost } = require('../models');
-
+// /mvc/blogpostController
+const { Blogpost, User } = require("../../models")
 const blogpostController = {
-    // render single blog and comment page
-    renderBlogCommentPage: async (req, res) => {
-        try {   
-            
-            // not sure this is correct
-          const blogcomments = await Comment.findAll({
-            include: [User]
-          });
-    
-          const comments = blogcomments.map((comment) => comment.get({ plain: true }));
-          // console.log(posts)
-    
-          // Render the 'home' view and pass user data and the loggedIn status to it
-          res.render('comment', { pageTitle: 'The Tech Blog', comments: blogcomments });
-    
-    
-        } catch (error) {
-          // Handle any potential errors
-          console.error('Error in renderComment:', error);
-          // You can customize error handling based on your requirements
-          res.status(500).send('commentController: Internal Server Error');
-        }
-      },
-    }   
+  renderBlogpost: async (req, res) => {
+    try {
+      const postId = req.params.postId;
+      const blogpost = await Blogpost.findByPk(postId, {
+        include: [User],
+      });
+
+      if (!blogpost) {
+        return res.status(404).send('Blog post not found');
+      }
+
+      console.log('Retrieved blogpost:', blogpost);
+
+      res.render('blogpost', { blogpost });
+    } catch (error) {
+      console.error('Error in renderBlogpost:', error);
+      res.status(500).send(`blogpostController.renderBlogpost: Internal Server Error\n${error.message}`);
+    }
+  },
+
+  renderBlogpostWithNewComment: async (req, res) => {
+    try {
+      const postId = req.params.id;
+      const blogpost = await Blogpost.findByPk(postId, {
+        include: [User],
+      });
+
+      if (!blogpost) {
+        return res.status(404).send('Blog post not found');
+      }
+
+      console.log('Retrieved blogpost:', blogpost);
+
+      res.render('blogpost', { blogpost });
+    } catch (error) {
+      console.error('Error in renderBlogpost:', error);
+      res.status(500).send(`blogpostController.renderBlogpost: Internal Server Error\n${error.message}`);
+    }
+  },
+};
 
 module.exports = blogpostController;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,9 @@
   <meta name="author" content="Your Name">
   <title>The Tech Blog</title>
   <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <script src="/js/blogPost.js" defer></script>
 </head>
+
 <body>
   <div class="container">
     <div class="black-div">
@@ -18,13 +21,13 @@
           <ul>
             <li><a href="/home">Home</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
-            <li id="logout"><a href="/logout">Logout</a></li>
+            <li id="/user/logout"><a href="/user/logout">Logout</a></li>
           </ul>
           {{else}}
           <ul>
             <li><a href="/home">Home</a></li>
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/login">Login</a></li>
+            <li><a href="/user/login">Login</a></li>
           </ul>
           {{/if}}
         </nav>
@@ -39,9 +42,8 @@
       &copy; 2023 The Tech Blog
     </footer>
   </div>
-  <!-- Render script for logged in users only -->
-  {{!-- {{#if loggedIn}} --}}
-  {{!-- <script src="/js/logout.js"></script> --}}
-  {{!-- {{/if}} --}}
+  <script src="/js/logoutScript.js" defer></script>
 </body>
+
+
 </html>

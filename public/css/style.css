@@ -84,13 +84,6 @@ h1 {
     height: 25%;
 }
 
-.clickable-h2 {
-    cursor: pointer;
-    padding: 5px;
-    border-radius: 5px;
-    display: inline-block;
-}
-
 .top-section {
     background-color: black;
     color: white;
@@ -102,10 +95,18 @@ h1 {
     /* Adjusted to take up 20% of the stacked div */
 }
 
-.top-section h2 {
+.blog-post-title {
     margin: 0;
-}
-
+    text-decoration: none; /* Remove underlines by default */
+    transition: color 0.3s ease; /* Add a smooth transition for color changes */
+  }
+  
+  /* Hover state styles */
+  .blog-post-title:hover {
+    cursor: pointer;
+    color: #007bff; /* Change the color on hover */
+  }
+  
 .top-section p {
     text-align: right;
     font-size: 10px;
@@ -119,3 +120,22 @@ h1 {
     flex: 0.8;
     /* Adjusted to take up 80% of the stacked div */
 }
+
+/* /public/css/style.css */
+.comment-form {
+    margin: 10px;   
+  }
+  
+  .comment-form input {
+    display: block;
+    border: 2px solid blue;
+    width: 100%;
+    margin-bottom: 10px; /* Optional: Add some spacing between input and button */
+  }
+  
+  .comment-form button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px; /* Optional: Add some spacing between input and button */
+  }
+  

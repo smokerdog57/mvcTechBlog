@@ -1,4 +1,4 @@
-// /routes/api/dashboardRoutes
+// /api/dashboardRoutes
 const express = require('express');
 const router = express.Router();
 const blogpostController = require('../../controllers/api/blogpostController');

@@ -1,4 +1,3 @@
-// /api/userController
 const User = require('../../models/User');
 const bcrypt = require('bcrypt');
 
@@ -19,11 +18,12 @@ const userController = {
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (!passwordMatch) {
+          console.log('Invalid password');
           return res.status(401).json({ error: 'Invalid user credentials' });
         }
 
         req.session.userId = email_id;
-
+        
         res.redirect('/home');
       } catch (err) {
         console.error(err);
@@ -32,12 +32,12 @@ const userController = {
     } else if (action === 'signup') {
       if (!email_id || !password) {
         // Redirect to the signup page if email or password is missing
+        console.log('Email or password missing');
         return res.redirect('/signup');
       }
 
       try {
         const hashedPassword = await bcrypt.hash(password, 10);
-
         const registration_date = new Date();
 
         const newUser = await User.create({
@@ -49,6 +49,7 @@ const userController = {
 
         req.session.userId = email_id;
 
+        console.log('Redirecting to /home after signup');
         res.redirect('/home');
       } catch (err) {
         console.error(err);
@@ -56,5 +57,6 @@ const userController = {
       }
     }
   },
-}
+};
+
 module.exports = userController;

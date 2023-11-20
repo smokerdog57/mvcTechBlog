@@ -3,11 +3,18 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const apiRoutes = require('./routes/api');
-const mvcRoutes = require('./routes/mvc');
-const apiControllers = require('./controllers/api');
-const mvcControllers = require('./controllers/mvc');
+const helpers = require('./utils/helpers');
 
+// import mvc routers
+const homeRoutes = require('./routes/mvc/homeRoutes');
+const userRoutes = require('./routes/mvc/userRoutes');
+const dashboardRoutes = require('./routes/mvc/dashboardRoutes');
+const blogpostRoutes = require('./routes/mvc/blogpostRoutes');
+
+// import api routers
+const apiuserRoutes = require('./routes/api/userRoutes');
+const apidashboardRoutes = require('./routes/api/dashboardRoutes');
+const apiblogpostRoutes = require('./routes/api/blogpostRoutes');
 
 // Import Sequelize dependencies
 const sequelize = require('./config/connection');
@@ -34,6 +41,7 @@ const sess = {
   }),
 };
 
+
 // Create a Handlebars instance and allow protoype default
 const hbs = exphbs.create({
   helpers,
@@ -50,17 +58,27 @@ app.set('view engine', 'handlebars');
 // Middleware to serve the browser session
 app.use(session(sess));
 
-// Middleware to serve JSON and form data
-app.use(express.json());
+// Middleware to serve JSON, form and static data
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static(path.join(__dirname,'public')));
 
-// Middleware to serve static files from the "public" directory
-app.use(express.static('public'));
-// app.use(express.static(path.join(__dirname,'public')));
+// Middleware to log incoming requests
+// app.use((req, res, next) => {
+//   console.log(`Received a ${req.method} request to ${req.path}`);
+//   next();
+// });
 
-// Middleware to serve the routes
-app.use('/api', apiRoutes);
-app.use('/', mvcRoutes);
+// Middleware to serve the api routes
+app.use('/api/user', apiuserRoutes);
+app.use('/api/dashboard', apidashboardRoutes);
+app.use('/api/blogpost', apiblogpostRoutes);
+
+// Middleware to serve the mvc routes
+app.use('/', homeRoutes);
+app.use('/user',userRoutes);
+app.use('/dashboard', dashboardRoutes);
+app.use('/blogpost', blogpostRoutes);
 
 // Start the server
 app.listen(PORT, () => {

@@ -1,21 +1,20 @@
-// Import any necessary dependencies or models if needed
+const Blogpost = require("../../models/Blogpost");
 
-// Define the dashboardController object
 const dashboardController = {
-  // Define a function to render the dashboard page
-  renderDashboard: (req, res) => {
+  renderDashboard: async (req, res) => {
     try {
-      // You can add any necessary logic here
-      // For now, render the 'dashboard' view
-      res.render('dashboard');
+      const userId = req.session.userId; // Assuming you store user ID in the session
+      const blogposts = await Blogpost.findAll({
+        where: { user_id: userId }, // Filter by the user's ID
+      });
+
+      // Render the 'dashboard' view and pass the user's blog posts
+      res.render("dashboard", { pageTitle: "Dashboard", posts: blogposts });
     } catch (error) {
-      // Handle any potential errors
-      console.error('Error in renderDashboard:', error);
-      // You can customize error handling based on your requirements
-      res.status(500).send('dashBoardController: Internal Server Error');
+      console.error("Error in renderDashboard:", error);
+      res.status(500).send("dashBoardController: Internal Server Error");
     }
   },
 };
 
-// Export the controller object
 module.exports = dashboardController;

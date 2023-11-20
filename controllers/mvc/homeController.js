@@ -3,7 +3,7 @@ const { Blogpost, User } = require("../../models")
 
 const homeController = {
   // Define a function to render the home page
-  renderHomepage: async (req, res, loggedIn) => { // Add the loggedIn parameter here
+  renderHomepage: async (req, res, loggedIn) => {
     try {
       // render the 'home' view
       const blogposts = await Blogpost.findAll({
@@ -14,7 +14,7 @@ const homeController = {
       // console.log(posts)
 
       // Render the 'home' view and pass user data and the loggedIn status to it
-      res.render('home', { pageTitle: 'The Tech Blog', posts: blogposts, loggedIn }); // Pass loggedIn here
+      res.render('home', { pageTitle: 'The Tech Blog', posts: blogposts, loggedIn });
 
 
     } catch (error) {

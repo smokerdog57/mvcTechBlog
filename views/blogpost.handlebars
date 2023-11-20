@@ -1,11 +1,12 @@
+{{!-- /views/blogpost.hbs --}}
 <div class="stacked-div-container">
     <div class="stacked-div">
         <div class="top-section">
-            <h2>{{title}} </h2>
-            <p>Posted by {{user.name}} on {{format_date created_date}}</p>
+            <h2>{{blogpost.title}} </h2>
+            <p>Posted by {{blogpost.user.name}} on {{format_date blogpost.created_date}}</p>
         </div>
         <div class="bottom-section">
-            <p>{{content}}</p>
+            <p>{{blogpost.content}}</p>
         </div>
     </div>
 </div>
@@ -15,10 +16,9 @@
         </div>
         <div class="bottom-section">
             <p>Comment</p>
-            <p>Posted by {{user.name}} on {{format_date created_date}}</p>
-            <form action="/comment" method="POST">
-                {{!-- comment form --}}
-                <input type="text" name="text" placeholder="type comment here">
+            {{!-- comment form --}}
+            <form class="comment-form" action="/api/blogpost/comment" method="POST">
+                <input type="text" name="text" id="comment-text" placeholder="type comment here">
                 <button type="submit" name="action" value="submit">Submit</button>
             </form>
         </div>
