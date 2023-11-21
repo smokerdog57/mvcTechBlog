@@ -1,3 +1,4 @@
+// /controllers/mvc/homecontroller
 // Define the controller object
 const { Blogpost, User } = require("../../models")
 
@@ -11,8 +12,7 @@ const homeController = {
       });
 
       const posts = blogposts.map((post) => post.get({ plain: true }));
-      // console.log(posts)
-
+    
       // Render the 'home' view and pass user data and the loggedIn status to it
       res.render('home', { pageTitle: 'The Tech Blog', posts: blogposts, loggedIn });
 

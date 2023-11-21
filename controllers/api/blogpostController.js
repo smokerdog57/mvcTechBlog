@@ -8,8 +8,8 @@ const blogpostController = {
         try {
             const { text } = req.body;
 
-            // Retrieve the username from the session (assuming you store it there)
-            const username = req.session.username;
+            // set username
+            username = 'Lernantino';
 
             // Create a new comment in the database
             const newComment = await Comment.create({

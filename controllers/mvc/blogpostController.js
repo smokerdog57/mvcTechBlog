@@ -12,8 +12,6 @@ const blogpostController = {
         return res.status(404).send('Blog post not found');
       }
 
-      console.log('Retrieved blogpost:', blogpost);
-
       res.render('blogpost', { blogpost });
     } catch (error) {
       console.error('Error in renderBlogpost:', error);
@@ -31,8 +29,6 @@ const blogpostController = {
       if (!blogpost) {
         return res.status(404).send('Blog post not found');
       }
-
-      console.log('Retrieved blogpost:', blogpost);
 
       res.render('blogpost', { blogpost });
     } catch (error) {

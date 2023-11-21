@@ -1,3 +1,4 @@
+// /server.js
 // Import dependencies
 const express = require('express');
 const session = require('express-session');
@@ -40,7 +41,6 @@ const sess = {
     db: sequelize,
   }),
 };
-
 
 // Create a Handlebars instance and allow protoype default
 const hbs = exphbs.create({
