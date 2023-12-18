@@ -1,7 +1,7 @@
 # 14 Model-View-Controller (MVC): Tech Blog
 
 ### Link to GitHub repository:  https://github.com/smokerdog57/mvcTechBlog
-### Heroku Deploy Link:		https://xxx
+### Heroku Deploy Link:			https://mvctechblogtpf-007db6850084.herokuapp.com/
 
 ## Badges
     
