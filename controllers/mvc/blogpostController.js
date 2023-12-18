@@ -3,7 +3,7 @@ const { Blogpost, User } = require("../../models")
 const blogpostController = {
   renderBlogpost: async (req, res) => {
     try {
-      const postId = req.params.postId;
+      const postId = req.params.post_id;
       const blogpost = await Blogpost.findByPk(postId, {
         include: [User],
       });
@@ -21,7 +21,7 @@ const blogpostController = {
 
   renderBlogpostWithNewComment: async (req, res) => {
     try {
-      const postId = req.params.id;
+      const postId = req.params.post_id;
       const blogpost = await Blogpost.findByPk(postId, {
         include: [User],
       });

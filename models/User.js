@@ -1,4 +1,4 @@
-// defines user table
+// /models/User.js
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 // const Blogpost = require('./Blogpost.js'); // Import the Blogpost model

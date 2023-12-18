@@ -25,7 +25,7 @@ const userController = {
 
         // set the session.userId property
         req.session.userId = username;
-        console.log(`userController: req.session.userid = ${req.session.userid}`);
+        req.session.loggedIn = true;
 
         res.redirect('/home');
       } catch (err) {
@@ -49,9 +49,11 @@ const userController = {
           registration_date,
         });
 
-        // set the session.userId property
-        req.session.userId = username;
-        console.log(`userController: req.session.userid = ${req.session.userid}`);
+        // save the user properties in the session             
+        req.session.save(() => {
+          req.session.userId = newUser.username;
+          req.session.loggedIn = true;
+        });
 
         res.redirect('/home');
       } catch (err) {

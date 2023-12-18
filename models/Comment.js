@@ -1,4 +1,4 @@
-// /models/Comment
+// /models/Comment.js
 
 // Dependencies
 const { Sequelize, Model, DataTypes } = require('sequelize');
@@ -28,6 +28,12 @@ Comment.init(
 
         created_date: {
             type: DataTypes.DATE,
+            allowNull: false,
+        },
+
+        // Add foreign key without association
+        post_id: {
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
     },

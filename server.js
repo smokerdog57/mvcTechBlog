@@ -8,9 +8,9 @@ const helpers = require('./utils/helpers');
 
 // import mvc routers
 const homeRoutes = require('./routes/mvc/homeRoutes');
-const userRoutes = require('./routes/mvc/userRoutes');
-const dashboardRoutes = require('./routes/mvc/dashboardRoutes');
-const blogpostRoutes = require('./routes/mvc/blogpostRoutes');
+const mvcUserRoutes = require('./routes/mvc/userRoutes');
+const mvcDashboardRoutes = require('./routes/mvc/dashboardRoutes');
+const mvcBlogpostRoutes = require('./routes/mvc/blogpostRoutes');
 
 // import api routers
 const apiuserRoutes = require('./routes/api/userRoutes');
@@ -42,6 +42,9 @@ const sess = {
   }),
 };
 
+// Middleware to serve the browser session
+app.use(session(sess));
+
 // Create a Handlebars instance and allow protoype default
 const hbs = exphbs.create({
   helpers,
@@ -55,11 +58,8 @@ const hbs = exphbs.create({
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-// Middleware to serve the browser session
-app.use(session(sess));
-
 // Middleware to serve JSON, form and static data
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));  // changed true to false
 app.use(express.json());
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -76,9 +76,9 @@ app.use('/api/blogpost', apiblogpostRoutes);
 
 // Middleware to serve the mvc routes
 app.use('/', homeRoutes);
-app.use('/user',userRoutes);
-app.use('/dashboard', dashboardRoutes);
-app.use('/blogpost', blogpostRoutes);
+app.use('/mvc/user', mvcUserRoutes);
+app.use('/mvc/dashboard', mvcDashboardRoutes);
+app.use('/mvc/blogpost', mvcBlogpostRoutes);
 
 // Start the server
 app.listen(PORT, () => {

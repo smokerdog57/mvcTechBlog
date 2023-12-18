@@ -3,7 +3,7 @@
     <div class="stacked-div">
         <div class="top-section">
             <h2>{{blogpost.title}} </h2>
-            <p>Posted by {{blogpost.user.name}} on {{format_date blogpost.created_date}}</p>
+            <p>Posted by {{blogpost.username}} on {{format_date blogpost.created_date}}</p>
         </div>
         <div class="bottom-section">
             <p>{{blogpost.content}}</p>
@@ -16,10 +16,10 @@
         </div>
         <div class="bottom-section">
             <p>Comment</p>
-            {{!-- comment form --}}
-            <form class="comment-form" action="/api/blogpost/comment" method="POST">
+            {{!-- comment form --}}            
+            <form class="comment-form" >
                 <input type="text" name="text" id="comment-text" placeholder="type comment here">
-                <button type="submit" name="action" value="submit">Submit</button>
+                <button id="submitBtn" type="submit" name="action" value="submit">Submit</button>
             </form>
         </div>
     </div>

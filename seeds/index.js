@@ -17,8 +17,8 @@ const seedAll = async () => {
     await seedBlogposts ();
     console.log('\n----- BLOGPOSTS -----\n');
 
-    await seedComments ();
-    console.log('\n----- COMMENTS -----\n');
+    // await seedComments ();
+    // console.log('\n----- COMMENTS -----\n');
 
     process.exit(0);
   } catch (error) {

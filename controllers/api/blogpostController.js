@@ -7,15 +7,17 @@ const blogpostController = {
     postComment: async (req, res) => {
         try {
             const { text } = req.body;
-
             // set username
-            username = 'Lernantino';
-
+            // let username = req.session.userId;
+            username = 'Lernantino'          
+            const post_id = req.params.post_id; // Access post_id from the URL parameter
+          
             // Create a new comment in the database
             const newComment = await Comment.create({
                 text,
                 username,
-                created_date: new Date(), // Set the created_date to the current date
+                created_date: new Date(), 
+                post_id,
             });
 
             // Respond with a success message and the new comment
@@ -26,6 +28,38 @@ const blogpostController = {
         }
     },
 
+    fetchBlogpostAndComment: async (req, res) => {
+        try {
+            const postId = req.params.postId;
+
+            // Fetch the blog post and include the associated user
+            const blogpost = await Blogpost.findByPk(postId, {
+                include: [User],
+            });
+
+            if (!blogpost) {
+                return res.status(404).send('Blog post not found');
+            }
+
+            // Fetch the associated comment using the blog post id
+            const comment = await Comment.findOne({
+                where: { blogpost_id: postId },
+            });
+
+            if (!comment) {
+                return res.status(404).send('Comment not found');
+            }
+
+            // Now you have both the blog post and associated comment
+            // You can send them to the frontend or proceed with further processing
+
+            res.status(200).json({ blogpost, comment });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
+    //******************************************************** */
     // Create a new blog post
     postBlog: async (req, res) => {
         try {

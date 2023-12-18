@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const blogpostController = require('../../controllers/api/blogpostController');
 
-// Add a comment to a blog post
-router.post('/comment', blogpostController.postComment);
+// Call postComment method to write new comment to database via route:  /api/blogpost/commentsave/:post_id
+router.post('/commentsave/:post_id', blogpostController.postComment);
 
 module.exports = router;
